@@ -12,10 +12,7 @@
 @interface AVPlayerControlView ()
 {
     NSTimer *hideTimer;
-    CAGradientLayer *_gradientLayer;
-    
     dispatch_once_t once;
-    
     BufferSpinnerView *spinnerView;
 }
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
@@ -51,10 +48,6 @@
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"video_circle_default"] forState:UIControlStateNormal];
     [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"video_circle_pressed"] forState:UIControlStateHighlighted];
     
-    _gradientLayer = [CAGradientLayer layer];
-    [self.bottomControlView.layer insertSublayer:_gradientLayer atIndex:0];
-    _gradientLayer.colors = @[(id)[[UIColor blackColor] colorWithAlphaComponent:0].CGColor,(id)[[UIColor blackColor] colorWithAlphaComponent:0.54].CGColor];
-    
     spinnerView = [[BufferSpinnerView alloc] initWithFrame:self.actionButton.bounds];
     [self.actionButton addSubview:spinnerView];
     [spinnerView stopAnimating];
@@ -63,7 +56,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _gradientLayer.frame = self.bottomControlView.bounds;
 }
 
 #pragma mark - Setter
@@ -79,7 +71,6 @@
 }
 - (void)setGradientColorsAtBottom:(NSArray *)colors
 {
-    _gradientLayer.colors = colors;
 }
 
 #pragma mark - Observer 
