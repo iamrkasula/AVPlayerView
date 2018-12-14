@@ -94,14 +94,14 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (self.playerItem) {
             
-            dispatch_once(&once, ^{
+            //dispatch_once(&once, ^{
                 [self updateDurationOnMainThread:0];
                 AVURLAsset *asset = (AVURLAsset *)[self.playerItem asset];
                 float duration = CMTimeGetSeconds(asset.duration);
                 if (!isnan(duration)) {
                     [self updateDurationOnMainThread:duration];
                 }
-            });
+            //});
             
         } else {
             once = 0;
